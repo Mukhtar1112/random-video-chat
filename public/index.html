@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Random Chat</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- ==============================
+         TOP BAR
+    =============================== -->
+
+    <header class="top-bar">
+
+        <div class="brand">
+
+            <h1>Random Chat</h1>
+
+            <p>
+                Face-to-face with a stranger
+            </p>
+
+        </div>
+
+
+        <div
+            id="status"
+            class="status searching"
+        >
+
+            <span class="status-dot"></span>
+
+            <span id="statusText">
+                Finding stranger
+            </span>
+
+            <span
+                id="loadingDots"
+                class="loading-dots"
+            >
+                ...
+            </span>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==============================
+         MAIN
+    =============================== -->
+
+    <main>
+
+
+        <!-- ==============================
+             VIDEO AREA
+        =============================== -->
+
+        <div class="video-area">
+
+
+            <!-- STRANGER VIDEO -->
+
+            <div class="video-panel">
+
+                <video
+                    id="remoteVideo"
+                    autoplay
+                    playsinline
+                ></video>
+
+
+                <!-- SEARCHING OVERLAY -->
+
+                <div
+                    id="searchOverlay"
+                    class="search-overlay"
+                >
+
+                    <div class="loader"></div>
+
+                    <h2>
+                        Finding a stranger
+                    </h2>
+
+                    <p>
+                        Please wait...
+                    </p>
+
+                </div>
+
+
+                <div class="video-label">
+                    Stranger
+                </div>
+
+            </div>
+
+
+
+            <!-- YOUR VIDEO -->
+
+            <div class="video-panel">
+
+                <video
+                    id="localVideo"
+                    autoplay
+                    muted
+                    playsinline
+                ></video>
+
+                <div class="video-label">
+                    You
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==============================
+             CONTROLS
+        =============================== -->
+
+       <!-- ==============================
+     CONTROLS
+============================== -->
+
+<div class="controls">
+
+    <button
+        id="nextButton"
+        class="next-button"
+    >
+        Next
+    </button>
+
+
+    <button
+        id="reportButton"
+        class="report-button"
+    >
+        Report
+    </button>
+
+
+    <button
+        id="leaveButton"
+        class="leave-button"
+    >
+        Leave
+    </button>
+
+</div>
+
+
+<!-- ==============================
+     REPORT POPUP
+============================== -->
+
+<div
+    id="reportModal"
+    class="report-modal"
+>
+
+    <div class="report-box">
+
+        <h2>
+            Report Stranger
+        </h2>
+
+        <p>
+            Why are you reporting this user?
+        </p>
+
+
+        <label>
+            <input
+                type="radio"
+                name="reportReason"
+                value="Inappropriate content"
+            >
+            Inappropriate content
+        </label>
+
+
+        <label>
+            <input
+                type="radio"
+                name="reportReason"
+                value="Harassment or abuse"
+            >
+            Harassment or abuse
+        </label>
+
+
+        <label>
+            <input
+                type="radio"
+                name="reportReason"
+                value="Nudity or sexual content"
+            >
+            Nudity or sexual content
+        </label>
+
+
+        <label>
+            <input
+                type="radio"
+                name="reportReason"
+                value="Spam or scam"
+            >
+            Spam or scam
+        </label>
+
+
+        <label>
+            <input
+                type="radio"
+                name="reportReason"
+                value="Other"
+            >
+            Other
+        </label>
+
+
+        <div class="report-actions">
+
+            <button
+                id="cancelReport"
+                class="cancel-report"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                id="submitReport"
+                class="submit-report"
+            >
+                Submit Report
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+    </main>
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="script.js"></script>
+
+
+</body>
+
+</html>

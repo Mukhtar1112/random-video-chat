@@ -1,0 +1,711 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    background: #000;
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    overflow: hidden;
+}
+
+/* ==============================
+   TOP BAR
+============================== */
+
+.top-bar {
+    height: 70px;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 25px;
+
+    background: #151515;
+
+    border-bottom: 1px solid #292929;
+
+    position: relative;
+    z-index: 20;
+}
+
+.brand h1 {
+    font-size: 22px;
+    margin-bottom: 3px;
+}
+
+.brand p {
+    color: #999;
+    font-size: 13px;
+}
+
+/* ==============================
+   STATUS
+============================== */
+
+.status {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.status.searching {
+    color: #f0b429;
+}
+
+.status.connected {
+    color: #35d07f;
+}
+
+.loading-dots {
+    display: inline-block;
+
+    width: 20px;
+
+    overflow: hidden;
+
+    animation: dots 1.2s steps(4, end) infinite;
+}
+
+@keyframes dots {
+
+    0% {
+        width: 0;
+    }
+
+    25% {
+        width: 6px;
+    }
+
+    50% {
+        width: 12px;
+    }
+
+    75% {
+        width: 18px;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+/* ==============================
+   MAIN
+============================== */
+
+main {
+    width: 100%;
+    height: calc(100vh - 70px);
+
+    position: relative;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+}
+
+/* ==============================
+   VIDEO AREA
+============================== */
+
+.video-area {
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+
+    gap: 0;
+    column-gap: 0;
+    row-gap: 0;
+
+    margin: 0;
+    padding: 0;
+
+    background: #000;
+
+    overflow: hidden;
+}
+
+/* ==============================
+   VIDEO PANEL
+============================== */
+
+.video-panel {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    background: #000;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+/* ==============================
+   VIDEO
+============================== */
+
+.video-panel video {
+    display: block;
+
+    width: auto;
+    height: auto;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: contain;
+    object-position: center center;
+
+    background: #000;
+}
+/* ==============================
+   LABEL
+============================== */
+
+.video-label {
+    position: absolute;
+
+    left: 15px;
+    bottom: 15px;
+
+    padding: 7px 12px;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    border-radius: 6px;
+
+    font-size: 13px;
+
+    z-index: 10;
+}
+
+/* ==============================
+   SEARCH OVERLAY
+============================== */
+
+.search-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background: rgba(10, 10, 10, 0.75);
+
+    backdrop-filter: blur(4px);
+
+    z-index: 15;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+.search-overlay.hidden {
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+.search-overlay h2 {
+    margin-top: 18px;
+
+    font-size: 21px;
+}
+
+.search-overlay p {
+    margin-top: 7px;
+
+    color: #aaa;
+
+    font-size: 14px;
+}
+
+/* ==============================
+   LOADER
+============================== */
+
+.loader {
+    width: 42px;
+    height: 42px;
+
+    border: 4px solid rgba(255, 255, 255, 0.2);
+
+    border-top-color: white;
+
+    border-radius: 50%;
+
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+/* ==============================
+   CONTROLS
+============================== */
+
+.controls {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    position: absolute;
+
+    bottom: 12px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 30;
+}
+
+.controls button {
+    border: none;
+
+    min-width: 120px;
+
+    padding: 12px 25px;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.next-button {
+    background: white;
+
+    color: #111;
+}
+
+.leave-button {
+    background: #d9363e;
+
+    color: white;
+}
+
+/* =========================================================
+   PHONE
+========================================================= */
+@media (max-width: 700px) {
+
+    /* ==============================
+       TOP BAR
+    ============================== */
+
+    .top-bar {
+        height: 60px;
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    .brand h1 {
+        font-size: 19px;
+    }
+
+    .brand p {
+        font-size: 11px;
+    }
+
+    .status {
+        font-size: 12px;
+    }
+
+
+    /* ==============================
+       MAIN
+    ============================== */
+
+    main {
+        width: 100%;
+        height: calc(100vh - 60px);
+
+        margin: 0;
+        padding: 0;
+
+        position: relative;
+
+        overflow: hidden;
+    }
+
+
+    /* ==============================
+       VIDEO AREA
+    ============================== */
+
+    .video-area {
+        position: absolute;
+
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        margin: 0;
+        padding: 0;
+
+        display: flex;
+        flex-direction: column;
+
+        gap: 0;
+
+        background: #000;
+
+        overflow: hidden;
+    }
+
+
+    /* ==============================
+       EACH VIDEO
+    ============================== */
+
+    .video-panel {
+        position: relative;
+
+        width: 100%;
+        height: 50%;
+
+        flex: 0 0 50%;
+
+        margin: 0;
+        padding: 0;
+
+        border: 0;
+
+        background: #000;
+
+        overflow: hidden;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    /* ==============================
+       VIDEO
+    ============================== */
+
+    .video-panel video {
+        display: block;
+
+        width: 100%;
+        height: 100%;
+
+        margin: 0;
+        padding: 0;
+
+        border: 0;
+
+        object-fit: contain;
+        object-position: center center;
+
+        background: #000;
+    }
+
+
+    /* ==============================
+       LABEL
+    ============================== */
+
+    .video-label {
+        position: absolute;
+
+        left: 10px;
+        bottom: 10px;
+
+        padding: 5px 9px;
+
+        font-size: 11px;
+
+        z-index: 10;
+    }
+
+
+    /* ==============================
+       CONTROLS
+    ============================== */
+
+    .controls {
+        position: absolute;
+
+        bottom: 12px;
+        left: 50%;
+
+        transform: translateX(-50%);
+
+        width: 90%;
+
+        display: flex;
+
+        gap: 8px;
+
+        z-index: 30;
+    }
+
+    .controls button {
+        flex: 1;
+
+        min-width: 0;
+
+        padding: 12px 10px;
+
+        font-size: 15px;
+    }
+
+}
+/* ==============================
+   REPORT BUTTON
+============================== */
+
+.report-button {
+    background: #f0b429;
+    color: #111;
+}
+
+
+/* ==============================
+   REPORT MODAL
+============================== */
+
+.report-modal {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    z-index: 100;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.2s ease,
+        visibility 0.2s ease;
+}
+
+
+/* SHOW MODAL */
+
+.report-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* ==============================
+   REPORT BOX
+============================== */
+
+.report-box {
+    width: 90%;
+    max-width: 420px;
+
+    padding: 25px;
+
+    background: #181818;
+
+    border: 1px solid #333;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.5);
+
+    color: white;
+}
+
+
+.report-box h2 {
+    margin-bottom: 8px;
+
+    font-size: 21px;
+}
+
+
+.report-box p {
+    margin-bottom: 18px;
+
+    color: #aaa;
+
+    font-size: 14px;
+}
+
+
+/* ==============================
+   REPORT OPTIONS
+============================== */
+
+.report-box label {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+    margin-bottom: 12px;
+
+    padding: 10px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    background: #222;
+
+    font-size: 14px;
+}
+
+
+.report-box label:hover {
+    background: #2b2b2b;
+}
+
+
+.report-box input[type="radio"] {
+    width: 16px;
+    height: 16px;
+
+    cursor: pointer;
+}
+
+
+/* ==============================
+   REPORT ACTIONS
+============================== */
+
+.report-actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+
+.report-actions button {
+    flex: 1;
+
+    border: none;
+
+    padding: 11px;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.cancel-report {
+    background: #333;
+
+    color: white;
+}
+
+
+.submit-report {
+    background: #d9363e;
+
+    color: white;
+}
+
+
+/* ==============================
+   MOBILE REPORT
+============================== */
+
+@media (max-width: 700px) {
+
+    .report-box {
+        width: 92%;
+
+        padding: 20px;
+    }
+
+    .report-box h2 {
+        font-size: 19px;
+    }
+
+    .report-box label {
+        padding: 11px 9px;
+
+        font-size: 13px;
+    }
+
+    .report-actions button {
+        padding: 12px 8px;
+
+        font-size: 13px;
+    }
+
+}
