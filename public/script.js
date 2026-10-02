@@ -90,7 +90,7 @@ socket.on("matched", async (data) => {
 
     remoteVideo.srcObject = null;
 
-    createPeerConnection();
+    await createPeerConnection();
 
     // Only one person creates the offer
     if (data.createOffer) {
@@ -143,7 +143,7 @@ socket.on("offer", async (data) => {
 
     remoteVideo.srcObject = null;
 
-    createPeerConnection();
+    await createPeerConnection();
 
     try {
 
@@ -243,7 +243,7 @@ socket.on("ice-candidate", async (data) => {
 // CREATE WEBRTC CONNECTION
 // ==============================
 
-function createPeerConnection() {
+async function createPeerConnection() {
 
     if (!localStream) {
 
@@ -254,75 +254,100 @@ function createPeerConnection() {
         return;
     }
 
-    const iceServers = {
+    try {
 
-        iceServers: [
-            {
-                urls: "stun:stun.l.google.com:19302"
-            }
-        ]
-    };
-
-    peerConnection =
-        new RTCPeerConnection(iceServers);
-
-
-    // Add our camera and microphone
-    localStream.getTracks().forEach((track) => {
-
-        peerConnection.addTrack(
-            track,
-            localStream
+        const response = await fetch(
+            "https://random-video-chat-app.metered.live/api/v1/turn/credentials?apiKey=5af54f486cf9b751a4a4442a642d76df25bf"
         );
 
-    });
+        if (!response.ok) {
 
-
-    // Receive stranger video/audio
-    peerConnection.ontrack = (event) => {
-
-        console.log(
-            "Stranger video received."
-        );
-
-        remoteVideo.srcObject =
-            event.streams[0];
-
-    };
-
-
-    // Send ICE candidates
-    peerConnection.onicecandidate =
-        (event) => {
-
-            if (event.candidate && partnerId) {
-
-                socket.emit(
-                    "ice-candidate",
-                    {
-                        target: partnerId,
-                        candidate: event.candidate
-                    }
-                );
-
-            }
-        };
-
-
-    // Connection state
-    peerConnection.onconnectionstatechange =
-        () => {
-
-            if (!peerConnection) {
-                return;
-            }
-
-            console.log(
-                "Connection:",
-                peerConnection.connectionState
+            throw new Error(
+                "Could not get TURN credentials"
             );
 
+        }
+
+        const iceServers =
+            await response.json();
+
+        console.log(
+            "TURN/ICE servers received."
+        );
+
+        peerConnection =
+            new RTCPeerConnection({
+                iceServers: iceServers
+            });
+
+
+        // Add our camera and microphone
+        localStream.getTracks().forEach((track) => {
+
+            peerConnection.addTrack(
+                track,
+                localStream
+            );
+
+        });
+
+
+        // Receive stranger video/audio
+        peerConnection.ontrack = (event) => {
+
+            console.log(
+                "Stranger video received."
+            );
+
+            remoteVideo.srcObject =
+                event.streams[0];
+
         };
+
+
+        // Send ICE candidates
+        peerConnection.onicecandidate =
+            (event) => {
+
+                if (event.candidate && partnerId) {
+
+                    socket.emit(
+                        "ice-candidate",
+                        {
+                            target: partnerId,
+                            candidate: event.candidate
+                        }
+                    );
+
+                }
+
+            };
+
+
+        // Connection state
+        peerConnection.onconnectionstatechange =
+            () => {
+
+                if (!peerConnection) {
+                    return;
+                }
+
+                console.log(
+                    "Connection:",
+                    peerConnection.connectionState
+                );
+
+            };
+
+    } catch (error) {
+
+        console.error(
+            "TURN server error:",
+            error
+        );
+
+    }
+
 }
 // ==============================
 // REPORT
