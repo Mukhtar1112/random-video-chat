@@ -710,4 +710,13 @@ main {
         font-size: 13px;
     }
 
+}.controls {
+    display: flex !important;
+    background: red !important;
+    height: 60px !important;
+    width: 90% !important;
+    position: fixed !important;
+    bottom: 20px !important;
+    left: 5% !important;
+    z-index: 99999 !important;
 }
