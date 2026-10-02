@@ -482,34 +482,38 @@ main {
     /* ==============================
        CONTROLS
     ============================== */
+.controls {
+    position: fixed;
 
-    .controls {
-        position: absolute;
+    bottom: 20px;
 
-        bottom: 12px;
-        left: 50%;
+    left: 0;
 
-        transform: translateX(-50%);
+    width: 100%;
 
-        width: 90%;
+    display: flex;
 
-        display: flex;
+    justify-content: center;
 
-        gap: 8px;
+    gap: 8px;
 
-        z-index: 30;
-    }
+    padding: 0 10px;
 
-    .controls button {
-        flex: 1;
+    box-sizing: border-box;
 
-        min-width: 0;
+    z-index: 9999;
+}
 
-        padding: 12px 10px;
+.controls button {
+    flex: 1;
 
-        font-size: 15px;
-    }
+    max-width: 120px;
 
+    min-width: 0;
+
+    padding: 12px 8px;
+
+    font-size: 14px;
 }
 /* ==============================
    REPORT BUTTON
@@ -710,13 +714,4 @@ main {
         font-size: 13px;
     }
 
-}.controls {
-    display: flex !important;
-    background: red !important;
-    height: 60px !important;
-    width: 90% !important;
-    position: fixed !important;
-    bottom: 20px !important;
-    left: 5% !important;
-    z-index: 99999 !important;
 }
