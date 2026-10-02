@@ -489,32 +489,39 @@ main {
 
     left: 0;
 
-    width: 100%;
+    width: 100vw;
 
     display: flex;
 
     justify-content: center;
 
-    gap: 8px;
+    align-items: center;
 
-    padding: 0 10px;
+    gap: 6px;
+
+    padding: 0 8px;
 
     box-sizing: border-box;
 
     z-index: 9999;
+
+    overflow: hidden;
 }
 
 .controls button {
     flex: 1;
 
-    max-width: 120px;
+    max-width: none;
 
     min-width: 0;
 
-    padding: 12px 8px;
+    padding: 10px 4px;
 
-    font-size: 14px;
+    font-size: 13px;
+
+    white-space: nowrap;
 }
+
 /* ==============================
    REPORT BUTTON
 ============================== */
